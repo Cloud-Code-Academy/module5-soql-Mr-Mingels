@@ -46,14 +46,13 @@ public with sharing class SOQLTest {
         insert new List<Contact>{testContact1, testContact2, testContact3};
 
         // Call the method to test
-        List<Contact> contacts = SOQL.getJohnContacts();
+        List<Contact> contacts = SOQL.getContactsByFirstName();
 
         // Assert that the number of contacts returned is correct
         System.assertEquals(2, contacts.size(), 'Number of contacts returned is incorrect.');
 
         // Assert that the contacts returned have the correct names
-        // NOTE: HAD TO SWITCH THE LAST AND FIRST NAMES AROUND BECAUSE WHEN YOU QUERY THE CONTACT NAME IT STARTS WITH THE LAST NAME FIRST
-        Set<String> contactNames = new Set<String>{'Doe John', 'Smith John'};
+        Set<String> contactNames = new Set<String>{'John Doe', 'John Smith'};
         try {
             for (Contact contact : contacts) {
                 System.assert(contactNames.contains(contact.Name), 'Contact name is incorrect.');
@@ -72,7 +71,7 @@ public with sharing class SOQLTest {
         insert new List<Contact>{testContact1, testContact2, testContact3};
 
         // Call the method to test
-        List<Id> contactIds = SOQL.getSmithOrJonesContactIds();
+        List<Id> contactIds = SOQL.getContactIdsByLastName();
 
         // Assert that the number of contact IDs returned is correct
         System.assertEquals(2, contactIds.size(), 'Number of contact IDs returned is incorrect.');
@@ -157,7 +156,7 @@ public with sharing class SOQLTest {
     }
 
     @IsTest
-    static void testGetContactsByEmailDomain() {
+    static void testGetContactsByEmailDomain() {      
         // Create test data
         Contact testContact1 = new Contact(FirstName = 'John', LastName = 'Doe', Email = 'john@example.com');
         Contact testContact2 = new Contact(FirstName = 'Jane', LastName = 'Smith', Email = 'jane@example.com');
@@ -171,8 +170,7 @@ public with sharing class SOQLTest {
         System.assertEquals(2, contacts.size(), 'Number of contacts returned is incorrect.');
 
         // Assert that the contacts returned have the correct names and email domains
-        // NOTE: HAD TO SWITCH THE LAST AND FIRST NAMES AROUND BECAUSE WHEN YOU QUERY THE CONTACT NAME IT STARTS WITH THE LAST NAME FIRST
-        Set<String> contactNames = new Set<String>{'Doe John', 'Smith Jane'};
+        Set<String> contactNames = new Set<String>{'John Doe', 'Jane Smith'};
         try {
             for (Contact contact : contacts) {
                 System.assert(contactNames.contains(contact.Name), 'Contact name is incorrect.');

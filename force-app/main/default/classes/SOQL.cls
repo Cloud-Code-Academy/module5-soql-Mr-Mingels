@@ -41,7 +41,7 @@ public with sharing class SOQL {
      * @return A list of Contact records.
      * Update the corresponding test class and testGetContactsByFirstName method to cover this method
      */
-    public static Contact[] getJohnContacts() {
+    public static Contact[] getContactsByFirstName() {
         List<Contact> contacts = [SELECT Id, Name FROM Contact WHERE FirstName='John'];
 
         return contacts;
@@ -54,7 +54,7 @@ public with sharing class SOQL {
      * @return A list of Contact Ids.
      * Update the corresponding test class and testGetContactIdsByLastName method to cover this method
      */
-    public static Id[] getSmithOrJonesContactIds() {
+    public static Id[] getContactIdsByLastName() {
         return new List<Id>(new Map<Id, Contact>([SELECT Id FROM Contact WHERE LastName='Smith' OR LastName='Jones']).keySet());
     }
 
